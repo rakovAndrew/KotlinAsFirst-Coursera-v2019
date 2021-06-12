@@ -3,6 +3,7 @@
 package lesson3.task1
 
 import kotlin.math.sqrt
+import kotlin.math.pow
 
 /**
  * Пример
@@ -12,7 +13,7 @@ import kotlin.math.sqrt
 fun factorial(n: Int): Double {
     var result = 1.0
     for (i in 1..n) {
-        result = result * i // Please do not fix in master
+        result *= i // Please do not fix in master
     }
     return result
 }
@@ -75,7 +76,13 @@ fun digitNumber(n: Int): Int = TODO()
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int =
+    when (n) {
+        1 -> 1
+        2 -> 1
+        else -> fib(n - 2) + fib(n - 1)
+    }
+
 
 /**
  * Простая
@@ -196,7 +203,26 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var count = 0
+    var number = 1
+
+    while(true) {
+        var digitNumber = number * number
+
+        while(digitNumber > 0) {
+            count++
+            digitNumber /= 10
+        }
+        if(count >= n) break
+        number++
+    }
+    // this expression count:
+    // 1- square of a number
+    // 2- position of the n in the square of the number
+    // 3- find a digit on the position
+    return ((number * number) / (10.0.pow(count - n)).toInt()) % 10
+}
 
 /**
  * Сложная
@@ -207,4 +233,27 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var count = 0
+    var number = 1
+
+    while(true) {
+        var digitNumber = fib(number)
+
+        while(digitNumber > 0) {
+            count++
+            digitNumber /= 10
+        }
+        if(count >= n) break
+        number++
+    }
+    // this expression count:
+    // 1- fib of a number
+    // 2- position of the n in the square of the number
+    // 3- find a digit on the position
+    return ((fib(number)) / (10.0.pow(count - n)).toInt()) % 10
+}
+
+fun main() {
+    println(fibSequenceDigit(8))
+}
