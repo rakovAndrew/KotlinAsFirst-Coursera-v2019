@@ -217,7 +217,7 @@ fun squareSequenceDigit(n: Int): Int {
         if(count >= n) break
         number++
     }
-    // this expression count:
+    // this expression counts:
     // 1- square of a number
     // 2- position of the n in the square of the number
     // 3- find a digit on the position
@@ -247,7 +247,7 @@ fun fibSequenceDigit(n: Int): Int {
         if(count >= n) break
         number++
     }
-    // this expression count:
+    // this expression counts:
     // 1- fib of a number
     // 2- position of the n in the square of the number
     // 3- find a digit on the position
